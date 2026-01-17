@@ -59,8 +59,13 @@ public class lv3 : MonoBehaviour
 
     private IEnumerator Wait()
     {
-        yield return new WaitForSeconds(1f);
-        Invoke(nameof(LoadQuestion), 1f);
+        { yield return new WaitForSeconds(1f); }
+        if (currentQuestionIndex >= questions.Count)
+        {
+            Invoke(nameof(LoadQuestion), 16f); ;
+        }
+        else { Invoke(nameof(LoadQuestion), 1f); };
+        
         switch (currentQuestionIndex)
         {
             case 1:
