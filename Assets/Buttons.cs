@@ -193,7 +193,7 @@ public class Lvl2 : MonoBehaviour
                     break;
                 case 4:
                     text_4.SetActive(true);
-                    yield return new WaitForSeconds(8.0f);
+                    yield return new WaitForSeconds(10.0f);
                     text_4.SetActive(false);
                     break;
                 case 5:
