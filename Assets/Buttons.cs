@@ -18,17 +18,24 @@ public class Lvl2 : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private float glowDuration = 0.4f;
-    [SerializeField] private float signDuration = 3.0f;
     [SerializeField] private float delayBetweenGlows = 0.3f;
-    [SerializeField] private float emotionDuration = 12.0f;
 
     [Header("Text Objects")]
-    [SerializeField] private GameObject text_1;
-    [SerializeField] private GameObject text_2;
-    [SerializeField] private GameObject text_3;
-    [SerializeField] private GameObject text_4;
-    [SerializeField] private GameObject text_5;
-    [SerializeField] private GameObject text_6;
+    [SerializeField] private GameObject text_1_1;
+    [SerializeField] private GameObject text_1_2;
+    [SerializeField] private GameObject text_2_1;
+    [SerializeField] private GameObject text_2_2;
+    [SerializeField] private GameObject text_2_3;
+    [SerializeField] private GameObject text_3_1;
+    [SerializeField] private GameObject text_3_2;
+    [SerializeField] private GameObject text_3_3;
+    [SerializeField] private GameObject text_4_1;
+    [SerializeField] private GameObject text_4_2;
+    [SerializeField] private GameObject text_5_1;
+    [SerializeField] private GameObject text_5_2;
+    [SerializeField] private GameObject text_6_1;
+    [SerializeField] private GameObject text_6_2;
+
 
     [SerializeField] private Animator emotionsAnimator;
     [SerializeField] private Animator centerAnimator;
@@ -74,11 +81,21 @@ public class Lvl2 : MonoBehaviour
 
     public void StartRound()
     {
-        currentIndex = 0;
-        GenerateSequence(round);
-        StartCoroutine(PlaySequence());
-        PlayerPrefs.SetInt("levelsUnlocked", 3);
-        PlayerPrefs.Save();
+        if (round <= maxRounds)
+        {
+            currentIndex = 0;
+            GenerateSequence(round);
+            StartCoroutine(PlaySequence());
+            PlayerPrefs.SetInt("levelsUnlocked", 3);
+            PlayerPrefs.Save();
+        }
+
+        else if (round > maxRounds)
+        {
+            endSource.PlayOneShot(endClip);
+            curtainsAnimator.SetTrigger("CurtainsClose");
+            endWindow.SetActive(true);
+        }
     }
 
     void GenerateSequence(int length)
@@ -136,75 +153,100 @@ public class Lvl2 : MonoBehaviour
     // ===================== GAME STATES =====================
     IEnumerator Correct()
     {
-        playerTurn = false;
-
-        centerAnimator.SetTrigger("correct");
-        congratulationsSource.PlayOneShot(congratulationsClip);
-        yield return new WaitForSeconds(1f);
-
-        Emotions.SetActive(true);
-        switch (round)
-        {
-            case 1:
-                
-                round1Source.PlayOneShot(round1Clip);
-                break;
-            case 2:
-                round2Source.PlayOneShot(round2Clip);
-
-                break;
-            case 3:
-                round3Source.PlayOneShot(round3Clip);
-                break;
-            case 4:
-                round4Source.PlayOneShot(round4Clip);
-                break;
-            case 5:
-                round5Source.PlayOneShot(round5Clip);
-                break;
-            case 6:
-                round6Source.PlayOneShot(round6Clip);
-                break;
-            default:
-                break;
-        }
-
-        string triggerName = $"round_{round}";
-        emotionsAnimator.SetTrigger(triggerName);
-
+        
         if (round <= maxRounds)
         {
+            playerTurn = false;
+
+            centerAnimator.SetTrigger("correct");
+            congratulationsSource.PlayOneShot(congratulationsClip);
+            yield return new WaitForSeconds(1f);
+
+            Emotions.SetActive(true);
             switch (round)
             {
                 case 1:
-                    text_1.SetActive(true);
-                    yield return new WaitForSeconds(7.0f);
-                    text_1.SetActive(false);
+
+                    round1Source.PlayOneShot(round1Clip);
                     break;
                 case 2:
-                    text_2.SetActive(true);
-                    yield return new WaitForSeconds(10.0f);
-                    text_2.SetActive(false);
+                    round2Source.PlayOneShot(round2Clip);
+
                     break;
                 case 3:
-                    text_3.SetActive(true);
-                    yield return new WaitForSeconds(11.0f);
-                    text_3.SetActive(false);
+                    round3Source.PlayOneShot(round3Clip);
                     break;
                 case 4:
-                    text_4.SetActive(true);
-                    yield return new WaitForSeconds(10.0f);
-                    text_4.SetActive(false);
+                    round4Source.PlayOneShot(round4Clip);
                     break;
                 case 5:
-                    text_5.SetActive(true);
-                    yield return new WaitForSeconds(10.0f);
-                    text_5.SetActive(false);
+                    round5Source.PlayOneShot(round5Clip);
                     break;
                 case 6:
-                    text_6.SetActive(true);
-                    yield return new WaitForSeconds(9.0f);
-                    text_6.SetActive(false);
+                    round6Source.PlayOneShot(round6Clip);
+                    break;
+                default:
+                    break;
+            }
+
+            string triggerName = $"round_{round}";
+            emotionsAnimator.SetTrigger(triggerName);
+
+            switch (round)
+            {
+                case 1:
+                    text_1_1.SetActive(true);
+                    yield return new WaitForSeconds(3.0f);
+                    text_1_1.SetActive(false);
+                    text_1_2.SetActive(true);
+                    yield return new WaitForSeconds(4.0f);
+                    text_1_2.SetActive(false);
+                    break;
+                case 2:
+                    text_2_1.SetActive(true);
+                    yield return new WaitForSeconds(2.0f);
+                    text_2_1.SetActive(false);
+                    text_2_2.SetActive(true);
+                    yield return new WaitForSeconds(4.0f);
+                    text_2_2.SetActive(false);
+                    text_2_3.SetActive(true);
+                    yield return new WaitForSeconds(4.0f);
+                    text_2_3.SetActive(false);
+                    break;
+                case 3:
+                    text_3_1.SetActive(true);
+                    yield return new WaitForSeconds(3.5f);
+                    text_3_1.SetActive(false);
+                    text_3_2.SetActive(true);
+                    yield return new WaitForSeconds(2.5f);
+                    text_3_2.SetActive(false);
+                    text_3_3.SetActive(true);
+                    yield return new WaitForSeconds(5.0f);
+                    text_3_3.SetActive(false);
+                    break;
+                case 4:
+                    text_4_1.SetActive(true);
+                    yield return new WaitForSeconds(4.0f);
+                    text_4_1.SetActive(false);
+                    text_4_2.SetActive(true);
+                    yield return new WaitForSeconds(5.0f);
+                    text_4_2.SetActive(false);
+                    break;
+                case 5:
+                    text_5_1.SetActive(true);
+                    yield return new WaitForSeconds(4.0f);
+                    text_5_1.SetActive(false);
+                    text_5_2.SetActive(true);
+                    yield return new WaitForSeconds(6.0f);
+                    text_5_2.SetActive(false);
+                    break;
+                case 6:
+                    text_6_1.SetActive(true);
+                    yield return new WaitForSeconds(4.0f);
+                    text_6_1.SetActive(false);
+                    text_6_2.SetActive(true);
+                    yield return new WaitForSeconds(6.0f);
+                    text_6_2.SetActive(false);
                     break;
                 default:
                     break;
@@ -217,14 +259,7 @@ public class Lvl2 : MonoBehaviour
             StartRound();
         }
 
-        else if (round > maxRounds)
-        {
-            endSource.PlayOneShot(endClip);
-            curtainsAnimator.SetTrigger("CurtainsClose");
-            endWindow.SetActive(true);
-            yield break;
-        }
-        
+
     }
 
 
