@@ -245,7 +245,6 @@ namespace Project
             if (!isStageActive) return;
 
             draggableObject = EventSystem.current.currentSelectedGameObject.transform;
-            draggableObject.transform.localScale *= 1.3f;
             draggableObject.GetComponent<Image>().raycastTarget = false;
             parentAfterDrag = draggableObject.parent;
             draggableObject.SetParent(draggableObject.root);
@@ -276,9 +275,6 @@ namespace Project
         public void EndDrag(BaseEventData data)
         {
             if (!isStageActive || draggableObject == null) return;
-
-            draggableObject.transform.localScale /= 1.3f;
-
             // Re-enable raycast on all pieces and target slots
             EnableAllPiecesRaycast();
             EnableAllTargetSlotsRaycast();
