@@ -21,6 +21,7 @@ public class Lvl2 : MonoBehaviour
     [SerializeField] private float delayBetweenGlows = 0.3f;
 
     [Header("Text Objects")]
+// 5 - 1 - 6 - 2 - 4 - 3 correct order 
     [SerializeField] private GameObject text_1_1;
     [SerializeField] private GameObject text_1_2;
     [SerializeField] private GameObject text_2_1;
@@ -167,23 +168,23 @@ public class Lvl2 : MonoBehaviour
             {
                 case 1:
 
-                    round1Source.PlayOneShot(round1Clip);
+                    round2Source.PlayOneShot(round2Clip);
                     break;
                 case 2:
-                    round2Source.PlayOneShot(round2Clip);
+                    round4Source.PlayOneShot(round4Clip);
 
                     break;
                 case 3:
-                    round3Source.PlayOneShot(round3Clip);
+                    round6Source.PlayOneShot(round6Clip);
                     break;
                 case 4:
-                    round4Source.PlayOneShot(round4Clip);
-                    break;
-                case 5:
                     round5Source.PlayOneShot(round5Clip);
                     break;
+                case 5:
+                    round1Source.PlayOneShot(round1Clip);
+                    break;
                 case 6:
-                    round6Source.PlayOneShot(round6Clip);
+                    round3Source.PlayOneShot(round3Clip);
                     break;
                 default:
                     break;
@@ -195,14 +196,8 @@ public class Lvl2 : MonoBehaviour
             switch (round)
             {
                 case 1:
-                    text_1_1.SetActive(true);
-                    yield return new WaitForSeconds(3.0f);
-                    text_1_1.SetActive(false);
-                    text_1_2.SetActive(true);
-                    yield return new WaitForSeconds(4.0f);
-                    text_1_2.SetActive(false);
-                    break;
-                case 2:
+                    
+
                     text_2_1.SetActive(true);
                     yield return new WaitForSeconds(2.0f);
                     text_2_1.SetActive(false);
@@ -213,7 +208,43 @@ public class Lvl2 : MonoBehaviour
                     yield return new WaitForSeconds(4.0f);
                     text_2_3.SetActive(false);
                     break;
+                case 2:
+                    text_4_1.SetActive(true);
+                    yield return new WaitForSeconds(4.0f);
+                    text_4_1.SetActive(false);
+                    text_4_2.SetActive(true);
+                    yield return new WaitForSeconds(5.0f);
+                    text_4_2.SetActive(false);
+                    break;
+
                 case 3:
+                    
+
+                    text_6_1.SetActive(true);
+                    yield return new WaitForSeconds(4.0f);
+                    text_6_1.SetActive(false);
+                    text_6_2.SetActive(true);
+                    yield return new WaitForSeconds(6.0f);
+                    text_6_2.SetActive(false);
+                    break;
+                case 4:
+                    text_5_1.SetActive(true);
+                    yield return new WaitForSeconds(4.0f);
+                    text_5_1.SetActive(false);
+                    text_5_2.SetActive(true);
+                    yield return new WaitForSeconds(6.0f);
+                    text_5_2.SetActive(false);
+                    break;
+                case 5:
+                    text_1_1.SetActive(true);
+                    yield return new WaitForSeconds(3.0f);
+                    text_1_1.SetActive(false);
+                    text_1_2.SetActive(true);
+                    yield return new WaitForSeconds(4.5f);
+                    text_1_2.SetActive(false);
+                    break;
+
+                case 6:
                     text_3_1.SetActive(true);
                     yield return new WaitForSeconds(3.5f);
                     text_3_1.SetActive(false);
@@ -224,30 +255,7 @@ public class Lvl2 : MonoBehaviour
                     yield return new WaitForSeconds(5.0f);
                     text_3_3.SetActive(false);
                     break;
-                case 4:
-                    text_4_1.SetActive(true);
-                    yield return new WaitForSeconds(4.0f);
-                    text_4_1.SetActive(false);
-                    text_4_2.SetActive(true);
-                    yield return new WaitForSeconds(5.0f);
-                    text_4_2.SetActive(false);
-                    break;
-                case 5:
-                    text_5_1.SetActive(true);
-                    yield return new WaitForSeconds(4.0f);
-                    text_5_1.SetActive(false);
-                    text_5_2.SetActive(true);
-                    yield return new WaitForSeconds(6.0f);
-                    text_5_2.SetActive(false);
-                    break;
-                case 6:
-                    text_6_1.SetActive(true);
-                    yield return new WaitForSeconds(4.0f);
-                    text_6_1.SetActive(false);
-                    text_6_2.SetActive(true);
-                    yield return new WaitForSeconds(6.0f);
-                    text_6_2.SetActive(false);
-                    break;
+
                 default:
                     break;
             }
